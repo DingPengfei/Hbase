@@ -117,22 +117,29 @@ public class HbaseTest {
      * insert data
      * @param tableName
      */
-    public static void insertData(String tableName) {
-        System.out.println("start insert data...");
-        HTablePool pool = new HTablePool(configuration, 1000);
-        HTable table = (HTable) pool.getTable(tableName);
-        Put put = new Put("112233bbcc".getBytes());
-        put.add("column1".getBytes(), null, "aaa".getBytes());//本行数据的第一列
-        put.add("column2".getBytes(), null, "bbb".getBytes());//本行数据的第二列
-        put.add("column3".getBytes(), null, "ccc".getBytes());//本行数据的第三列
-        try {
-            table.put(put);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("end insert data...");
-    }
+//    public static void insertData(String tableName) {
+//        System.out.println("start insert data...");
+//        HTablePool pool = new HTablePool(configuration, 1000);
+//        HTable table = (HTable) pool.getTable(tableName);
+//        Put put = new Put("112233bbcc".getBytes());
+//        put.add("column1".getBytes(), null, "aaa".getBytes());//本行数据的第一列
+//        put.add("column2".getBytes(), null, "bbb".getBytes());//本行数据的第二列
+//        put.add("column3".getBytes(), null, "ccc".getBytes());//本行数据的第三列
+//        try {
+//            table.put(put);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("end insert data...");
+//    }
+    public static void insertData(TableName tableName) {
+        System.out.println("Start inserting data...");
 
+
+        System.out.println();
+
+        System.out.println();
+    }
 
     /**
      * delete a row
