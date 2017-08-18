@@ -56,10 +56,22 @@ public class HBase {
         return hBaseService.getRows(tableName, rows);
     }
 
+    /**
+     * 获取单行数据
+     * @param tableName
+     * @param row
+     * @return
+     */
     public static Result getRow(String tableName, byte[] row) {
         return hBaseService.getRow(tableName, row);
     }
 
+    /**
+     * generate row keys
+     * @param rowKey
+     * @param <T>
+     * @return
+     */
     public static <T> byte[] generateRowkey(T rowKey) {
         return Bytes.toBytes(Md5Util.getHash(String.valueOf(rowKey)).substring(0, 8) + "_" + String.valueOf(rowKey));
     }

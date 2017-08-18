@@ -417,7 +417,7 @@ public class HBaseUtil {
 	
     /**
      * 异步往指定表添加数据
-     * @param tablename  	表名
+     * @param table name  	表名
      * @param puts	 			需要添加的数据
 	 * @return long				返回执行时间
      * @throws IOException
@@ -426,7 +426,7 @@ public class HBaseUtil {
 		long currentTime = System.currentTimeMillis();
 		Connection conn = getConnection();
 		final BufferedMutator.ExceptionListener listener = new BufferedMutator.ExceptionListener() {
-			@Override
+
 			public void onException(RetriesExhaustedWithDetailsException e, BufferedMutator mutator) {
 				for (int i = 0; i < e.getNumExceptions(); i++) {
 					System.out.println("Failed to sent put " + e.getRow(i) + ".");

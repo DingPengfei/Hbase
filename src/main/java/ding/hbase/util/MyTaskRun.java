@@ -19,7 +19,7 @@ public class MyTaskRun implements Runnable {
      * */
     public ThreadPoolUtil threadPool= ThreadPoolUtil.init();
 
-    @Override
+
     public void run() {
         try {
             // 开始执行任务
