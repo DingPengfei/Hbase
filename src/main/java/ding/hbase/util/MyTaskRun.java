@@ -19,7 +19,6 @@ public class MyTaskRun implements Runnable {
      * */
     public ThreadPoolUtil threadPool= ThreadPoolUtil.init();
 
-
     public void run() {
         try {
             // 开始执行任务
@@ -30,5 +29,4 @@ public class MyTaskRun implements Runnable {
 //        System.out.println("taskNum 线程池中线程数目 ："+threadPool.getExecutor().getPoolSize()+"，队列中等待执行的任务数目："+
 //                threadPool.getExecutor().getQueue().size()+"，已执行玩别的任务数目："+threadPool.getExecutor().getCompletedTaskCount());
     }
-
 }

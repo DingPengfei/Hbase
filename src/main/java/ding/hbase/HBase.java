@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Ding on 2017-8-18.
  */
 public class HBase {
-    private HBase() {}
+    HBase() {}
 
     private static HBaseService hBaseService;
 
@@ -25,7 +25,7 @@ public class HBase {
     }
 
     /**
-     * 写入单挑数据
+     * 写入单行数据
      * @param tableName
      * @param put
      * @param waiting
