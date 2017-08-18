@@ -1,5 +1,7 @@
 /**
  * Created by Administrator on 2017-8-16.
+ * reference:
+ * http://www.cnblogs.com/ylqmf/archive/2012/02/18/2357537.html
  */
 
 import java.io.IOException;
@@ -26,9 +28,9 @@ public class HbaseTest {
 
     public static void main(String[] args) throws IOException {
         TableName tableName = TableName.valueOf("javaTest");
-        createTable(tableName);
-        dropTable(tableName);
-        // insertData("wujintao");
+//        createTable(tableName);
+//        dropTable(tableName);
+         insertData(tableName);
         // QueryAll("wujintao");
         // QueryByCondition1("wujintao");
         // QueryByCondition2("wujintao");
@@ -140,6 +142,7 @@ public class HbaseTest {
 
         System.out.println();
     }
+
 
     /**
      * delete a row
