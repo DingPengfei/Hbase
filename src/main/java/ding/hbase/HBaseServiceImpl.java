@@ -8,6 +8,7 @@ import org.apache.hadoop.hbase.client.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -59,6 +60,42 @@ public class HBaseServiceImpl extends AbstractHBaseService {
         return super.getRow(tableName, row);
     }
 
+    @Override
+    public void deleteRow(String tableName, String rowKey) {
+        try {
+            HBaseUtil.delete(tableName, rowKey);
+        } catch (IOException e) {
+            logger.error("delete row failed .", e);
+        }
+    }
+
+    @Override
+    public void deleteRows(String tableName, String[] rowKeys) {
+        try {
+            HBaseUtil.delete(tableName, rowKeys);
+        } catch (IOException e) {
+            logger.error("delete rows failed .", e);
+        }
+    }
+
+    @Override
+    public void deleteTable(String tableName) {
+        try {
+            HBaseUtil.deleteTable(tableName);
+        } catch (IOException e) {
+            logger.error("delete table failed...", e);
+        }
+    }
+
+    @Override
+    public void createTable(String tableName, String[] columnFamilies, boolean preBuildRegion) {
+        try {
+            HBaseUtil.createTable(tableName, columnFamilies, preBuildRegion);
+        } catch (Exception e) {
+            logger.error("create table failed...", e);
+        }
+    }
+
     /**
      * 多线程异步提交
      * @param tableName
@@ -85,16 +122,5 @@ public class HBaseServiceImpl extends AbstractHBaseService {
                 logger.error("多线程异步提交返回数据执行失败.", e);
             }
         }
-    }
-
-    /**
-     * 创建表
-     * @param tableName
-     * @param columnFamilies
-     * @param preBuildRegion
-     * @throws Exception
-     */
-    public void createTable(String tableName, String[] columnFamilies, boolean preBuildRegion) throws Exception {
-        HBaseUtil.createTable(tableName, columnFamilies, preBuildRegion);
     }
 }

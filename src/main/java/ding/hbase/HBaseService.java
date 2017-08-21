@@ -34,6 +34,13 @@ public interface HBaseService {
 
     Result getRow(String tableName, byte[] row);
 
+    public void deleteRow(String tableName, String rowKey);
+
+    public void deleteRows(String tableName, String[] rowKeys);
+
+    public void deleteTable(String tableName);
+
+    public void createTable(String tableName, String[] columnFamilies, boolean preBuildRegion);
 }
 
 

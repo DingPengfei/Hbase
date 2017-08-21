@@ -75,4 +75,21 @@ public class HBase {
     public static <T> byte[] generateRowkey(T rowKey) {
         return Bytes.toBytes(Md5Util.getHash(String.valueOf(rowKey)).substring(0, 8) + "_" + String.valueOf(rowKey));
     }
+
+    public static void deleteRow(String tableName, String rowKey) {
+        hBaseService.deleteRow(tableName, rowKey);
+    }
+
+    public static void deleteRows(String tableName, String[] rowKeys) {
+        hBaseService.deleteRows(tableName, rowKeys);
+    }
+
+
+    public static void deleteTable(String tableName) {
+        hBaseService.deleteTable(tableName);
+    }
+
+    public static void  createTable(String tableName, String[] columnFamilies, boolean preBuildRegion) {
+        hBaseService.createTable(tableName, columnFamilies, preBuildRegion);
+    }
 }

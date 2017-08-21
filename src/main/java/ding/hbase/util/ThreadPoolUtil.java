@@ -16,8 +16,8 @@ public class ThreadPoolUtil {
     private static ThreadPoolUtil threadPool;
     private ThreadPoolExecutor executor=null;
     //线程池的基础参数 实际使用可写入到配置文件中
-    private int corePoolSize = 10;          // 核心池的大小 运行线程的最大值 当线程池中的线程数目达到corePoolSize后，就会把多余的任务放到缓存队列当中；
-    private int maximumPoolSize = 15;  // 创建线程最大值
+    private int corePoolSize = 5;          // 核心池的大小 运行线程的最大值 当线程池中的线程数目达到corePoolSize后，就会把多余的任务放到缓存队列当中；
+    private int maximumPoolSize = 10;  // 创建线程最大值
     private long keepAliveTime = 1;     // 线程没有执行任务时 被保留的最长时间 超过这个时间就会被销毁 直到线程数等于 corePoolSize
     private long timeout = 10;             // 等待线程池任务执行结束超时时间
 

@@ -425,7 +425,6 @@ public class HBaseUtil {
 		long currentTime = System.currentTimeMillis();
 		Connection conn = getConnection();
 		final BufferedMutator.ExceptionListener listener = new BufferedMutator.ExceptionListener() {
-
 			public void onException(RetriesExhaustedWithDetailsException e, BufferedMutator mutator) {
 				for (int i = 0; i < e.getNumExceptions(); i++) {
 					System.out.println("Failed to sent put " + e.getRow(i) + ".");
