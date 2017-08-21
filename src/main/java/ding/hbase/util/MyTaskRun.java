@@ -1,16 +1,20 @@
 package ding.hbase.util;
 
+import org.apache.hadoop.hbase.client.Put;
 import java.util.List;
 
 /**
  * Created by babylon on 2016/12/4.
+ *
+ * 文件出现错误信息，将SocPut类型改为Put类型
+ * By patrick 2017/08/21
  */
 public class MyTaskRun implements Runnable {
 
     private String tablename;
-    private List<SocPut> puts;
+    private List<Put> puts;
 
-    public MyTaskRun(String tablename, List<SocPut> puts) {
+    public MyTaskRun(String tablename, List<Put> puts) {
         this.tablename = tablename;
         this.puts = puts;
     }

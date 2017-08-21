@@ -33,7 +33,7 @@ public class HBaseServiceImpl extends AbstractHBaseService {
         threadPoolUtil.execute(new Runnable() {
             public void run() {
                 try {
-                    HBaseUtil.put(tableName, puts);
+                    System.out.println(HBaseUtil.put(tableName, puts));
                 } catch (Exception e) {
                     logger.error("batchPut failed . ", e);
                 }

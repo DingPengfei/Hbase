@@ -25,7 +25,6 @@ import java.util.List;
 public class HBaseUtil {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HBaseUtil.class);
-
 	private static Configuration conf;
 	private static Connection conn;
 
@@ -162,20 +161,20 @@ public class HBaseUtil {
 
     /**
      * 删除表
-     * @param tablename
+     * @param tableName
      * @throws IOException
      */
-	public static void deleteTable(String tablename) throws IOException {
+	public static void deleteTable(String tableName) throws IOException {
 		Connection conn = getConnection();
 		HBaseAdmin admin = (HBaseAdmin) conn.getAdmin();
 		try {
-			if (!admin.tableExists(tablename)) {
-				logger.warn("Table: {} is not exists!", tablename);
+			if (!admin.tableExists(tableName)) {
+				logger.warn("Table: {} is not exists!", tableName);
 				return;
 			}
-			admin.disableTable(tablename);
-			admin.deleteTable(tablename);
-			logger.info("Table: {} delete success!", tablename);
+			admin.disableTable(tableName);
+			admin.deleteTable(tableName);
+			logger.info("Table: {} delete success!", tableName);
 		} finally {
 			admin.close();
 			closeConnect(conn);
@@ -417,12 +416,12 @@ public class HBaseUtil {
 	
     /**
      * 异步往指定表添加数据
-     * @param table name  	表名
+     * @param tableName  	表名
      * @param puts	 			需要添加的数据
 	 * @return long				返回执行时间
      * @throws IOException
      */
-	public static long put(String tablename, List<Put> puts) throws Exception {
+	public static long put(String tableName, List<Put> puts) throws Exception {
 		long currentTime = System.currentTimeMillis();
 		Connection conn = getConnection();
 		final BufferedMutator.ExceptionListener listener = new BufferedMutator.ExceptionListener() {
@@ -434,7 +433,7 @@ public class HBaseUtil {
 				}
 			}
 		};
-		BufferedMutatorParams params = new BufferedMutatorParams(TableName.valueOf(tablename))
+		BufferedMutatorParams params = new BufferedMutatorParams(TableName.valueOf(tableName))
 				.listener(listener);
 		params.writeBufferSize(5 * 1024 * 1024);
 
@@ -451,26 +450,26 @@ public class HBaseUtil {
 
 	/**
 	 * 异步往指定表添加数据
-	 * @param tablename  	表名
+	 * @param tableName  	表名
 	 * @param put	 			需要添加的数据
 	 * @return long				返回执行时间
 	 * @throws IOException
 	 */
-	public static long put(String tablename, Put put) throws Exception {
-		return put(tablename, Arrays.asList(put));
+	public static long put(String tableName, Put put) throws Exception {
+		return put(tableName, Arrays.asList(put));
 	}
 
 	/**
 	 * 往指定表添加数据
-	 * @param tablename  	表名
+	 * @param tableName  	表名
 	 * @param puts	 			需要添加的数据
 	 * @return long				返回执行时间
 	 * @throws IOException
 	 */
-	public static long putByHTable(String tablename, List<?> puts) throws Exception {
+	public static long putByHTable(String tableName, List<?> puts) throws Exception {
 		long currentTime = System.currentTimeMillis();
 		Connection conn = getConnection();
-        HTable htable = (HTable) conn.getTable(TableName.valueOf(tablename));
+        HTable htable = (HTable) conn.getTable(TableName.valueOf(tableName));
 		htable.setAutoFlushTo(false);
 		htable.setWriteBufferSize(5 * 1024 * 1024);
 		try {
@@ -485,12 +484,12 @@ public class HBaseUtil {
     
 	/**
 	 * 删除单条数据
-	 * @param tablename
+	 * @param tableName
 	 * @param row
 	 * @throws IOException
 	 */
-	public static void delete(String tablename, String row) throws IOException {
-		Table table = getTable(tablename);
+	public static void delete(String tableName, String row) throws IOException {
+		Table table = getTable(tableName);
         if(table!=null){
 			try {
 				Delete d = new Delete(row.getBytes());
@@ -503,12 +502,12 @@ public class HBaseUtil {
 
 	/**
 	 * 删除多行数据
-	 * @param tablename
+	 * @param tableName
 	 * @param rows
 	 * @throws IOException
 	 */
-	public static void delete(String tablename, String[] rows) throws IOException {
-		Table table = getTable(tablename);
+	public static void delete(String tableName, String[] rows) throws IOException {
+		Table table = getTable(tableName);
 		if (table != null) {
 			try {
 				List<Delete> list = new ArrayList<Delete>();
@@ -532,7 +531,7 @@ public class HBaseUtil {
 	public static void closeConnect(Connection conn){
 		if(null != conn){
 			try {
-//				conn.close();
+				conn.close();
 			} catch (Exception e) {
                 logger.error("closeConnect failure !", e);
 			}
@@ -541,13 +540,13 @@ public class HBaseUtil {
 
 	/**
 	 * 获取单条数据
-	 * @param tablename
+	 * @param tableName
 	 * @param row
 	 * @return
 	 * @throws IOException
 	 */
-	public static Result getRow(String tablename, byte[] row) {
-		Table table = getTable(tablename);
+	public static Result getRow(String tableName, byte[] row) {
+		Table table = getTable(tableName);
 		Result rs = null;
 		if(table!=null){
 			try{
@@ -568,13 +567,13 @@ public class HBaseUtil {
 
 	/**
 	 * 获取多行数据
-	 * @param tablename
+	 * @param tableName
 	 * @param rows
 	 * @return
 	 * @throws Exception
 	 */
-	public static <T> Result[] getRows(String tablename, List<T> rows) {
-        Table table = getTable(tablename);
+	public static <T> Result[] getRows(String tableName, List<T> rows) {
+        Table table = getTable(tableName);
         List<Get> gets = null;
         Result[] results = null;
         try {
@@ -605,12 +604,12 @@ public class HBaseUtil {
 
 	/**
 	 * 扫描整张表，注意使用完要释放。
-	 * @param tablename
+	 * @param tableName
 	 * @return
 	 * @throws IOException
 	 */
-	public static ResultScanner get(String tablename) {
-		Table table = getTable(tablename);
+	public static ResultScanner get(String tableName) {
+		Table table = getTable(tableName);
 		ResultScanner results = null;
 		if (table != null) {
 			try {
