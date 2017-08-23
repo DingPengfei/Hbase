@@ -71,10 +71,6 @@ public class HBaseMani {
 
 
 
-
-
-
-
     public static List<Put> preDataForCCDD() throws IOException {
         //准备数据 多行　CCDD
         List<Put> puts = new ArrayList<>();
